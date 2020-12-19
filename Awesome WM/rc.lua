@@ -478,6 +478,10 @@ globalkeys = my_table.join(
         end,
         {description = "volume 0%", group = "hotkeys"}),
 
+    awful.key({}, "#121", function () awful.util.spawn("amixer -D pulse sset Master 0") end),
+    awful.key({ }, "#122", function () awful.util.spawn("amixer -D pulse sset Master 5%-") end),
+    awful.key({ }, "#123", function () awful.util.spawn("amixer -D pulse sset Master 5%+") end),
+
     -- MPD control
     awful.key({ altkey, "Control" }, "Up",
         function ()
