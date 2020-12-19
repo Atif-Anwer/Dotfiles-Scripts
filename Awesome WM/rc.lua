@@ -84,40 +84,41 @@ local themes = {
     "rainbow",         -- 8
     "steamburn",       -- 9
     "vertex",          -- 10
+    "powerarrow-blue", -- 11
 }
 
-local chosen_theme = themes[6]
+local chosen_theme = themes[11]
 local modkey       = "Mod4"
 local altkey       = "Mod1"
 local terminal     = "x-terminal-emulator"
 local vi_focus     = false -- vi-like client focus - https://github.com/lcpz/awesome-copycats/issues/275
 local cycle_prev   = true -- cycle trough all previous client or just the first -- https://github.com/lcpz/awesome-copycats/issues/274
-local editor       = os.getenv("EDITOR") or "vim"
-local gui_editor   = os.getenv("GUI_EDITOR") or "gvim"
+local editor       = os.getenv("EDITOR") or "nano"
+local gui_editor   = os.getenv("GUI_EDITOR") or "sublime-text.subl"
 local browser      = os.getenv("BROWSER") or "firefox"
 local scrlocker    = "slock"
 
 awful.util.terminal = terminal
-awful.util.tagnames = { "|| WEB |", " TERM |", " CHAT |", "PERF |", "CODE ||" }
+awful.util.tagnames = { "|| WEB |", " TERM |", " CHAT |", "PERF |", " EXTRA |", " EXTRA2 |", "CODE ||" }
 
 awful.layout.layouts = {
-    awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
-    --awful.layout.suit.fair,
-    --awful.layout.suit.fair.horizontal,
-    --awful.layout.suit.spiral,
-    --awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    --awful.layout.suit.magnifier,
-    --awful.layout.suit.corner.nw,
-    --awful.layout.suit.corner.ne,
-    --awful.layout.suit.corner.sw,
-    --awful.layout.suit.corner.se,
-    lain.layout.cascade,
+    awful.layout.suit.floating,
+    -- awful.layout.suit.fair,
+    -- awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.spiral,
+    -- awful.layout.suit.spiral.dwindle,
+    -- awful.layout.suit.max,
+    -- awful.layout.suit.max.fullscreen,
+    awful.layout.suit.magnifier,
+    -- awful.layout.suit.corner.nw,
+    -- awful.layout.suit.corner.ne,
+    -- awful.layout.suit.corner.sw,
+    -- awful.layout.suit.corner.se,
+    -- lain.layout.cascade,
     --lain.layout.cascade.tile,
     --lain.layout.centerwork,
     --lain.layout.centerwork.horizontal,
@@ -555,10 +556,10 @@ globalkeys = my_table.join(
     --           {description = "run prompt", group = "launcher"}),
     -- Dmenu
     awful.key({ modkey },            "r",     function () 
-    	--awful.screen.focused().mypromptbox:run() end,
+        --awful.screen.focused().mypromptbox:run() end,
           --    {description = "run prompt", group = "launcher"}),
           awful.util.spawn("dmenu_run") end,
-          		{description = "run dmenu", group = "launcher"}),
+                {description = "run dmenu", group = "launcher"}),
 
     awful.key({ modkey }, "x",
               function ()
@@ -710,6 +711,14 @@ awful.rules.rules = {
 
     { rule = { class = "Gimp", role = "gimp-image-window" },
           properties = { maximized = true } },
+
+    -- **************************************************
+    -- CUSTOM COMMANDS
+    -- **************************************************
+
+      -- Set DISCORD  to always map on the first tag on screen 1.
+    { rule = { class = "discord" },
+      properties = { screen = 1, tag = awful.util.tagnames[3] } },
 }
 -- }}}
 
@@ -801,7 +810,7 @@ beautiful.useless_gap = 7
 client.connect_signal("focus", function(c) c.border_color = "#FF0000" end)
 -- awful.spawn.with_shell("xrandr --output eDP-1 --primary --output DP-1-3 --left-of eDP-1")
 -- awful.spawn.with_shell("compton")
--- awful.spawn.with_shell("nitrogen --set-zoom-fill --random ~/Media/wallpapers/backgrounds")
+awful.spawn.with_shell("nitrogen --set-zoom-fill --random ~/Pictures/Wallpapers/")
 -- awful.spawn.with_shell("dropbox")
 
 -- HIDE TASKBAR IF NOT FLOATING 
@@ -837,11 +846,12 @@ end)
 
 -- Secondary Display
 awful.spawn.with_shell("xrandr --output eDP-1 --primary --output DP-1-3 --left-of eDP-1")
+awful.spawn.with_shell("xinput set-prop \"AlpsPS/2 ALPS DualPoint TouchPad\" \"libinput Tapping Enabled\" 1")
 
 
 -- Performance Monitoring
 -- Run Bpytop
+-- Clock 24 hrs : Edit in the theme.lua , %H:%M to %l:%M %[]
 --
 -- -- TO DO
--- Clock 24 hrs
 -- Center current window nameremove task widget
