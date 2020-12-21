@@ -534,6 +534,11 @@ globalkeys = my_table.join(
     awful.key({ modkey }, "a", function () awful.spawn(gui_editor) end,
               {description = "run gui editor", group = "launcher"}),
 
+    awful.key({                   }, "#148", function () 
+            underMouse = true 
+            awful.util.spawn(calculator) 
+        end),
+
     -- Default
     --[[ Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
@@ -711,10 +716,20 @@ awful.rules.rules = {
 
     -- Set Firefox to always map on the first tag on screen 1.
     { rule = { class = "Firefox" },
-      properties = { screen = 1, tag = awful.util.tagnames[1] } },
+      properties = { screen = 1, tag = awful.util.tagnames[1], opacity = 0.9 } },
+
+    { rule = { name = "Sublime-Text.subl" },
+      properties = { tag = awful.util.tagnames[5], switchtotag = true, maximized_vertical = true, maximized_horizontal = true, opacity = 0.7 } },
 
     { rule = { class = "Gimp", role = "gimp-image-window" },
           properties = { maximized = true } },
+
+    { rule = { class = "Gnome-calculator",  },
+        properties = { 
+        floating = true,
+        callback = function(c) awful.placement.under_mouse(c) end,
+        },
+    },
 
     -- **************************************************
     -- CUSTOM COMMANDS
@@ -814,7 +829,8 @@ beautiful.useless_gap = 7
 client.connect_signal("focus", function(c) c.border_color = "#FF0000" end)
 -- awful.spawn.with_shell("xrandr --output eDP-1 --primary --output DP-1-3 --left-of eDP-1")
 -- awful.spawn.with_shell("compton")
-awful.spawn.with_shell("nitrogen --set-zoom-fill --random ~/Pictures/Wallpapers/")
+-- awful.spawn.with_shell("nitrogen --set-zoom-fill --random ~/Pictures/Wallpapers/")
+awful.spawn.with_shell("nitrogen --restore &")
 -- awful.spawn.with_shell("dropbox")
 
 -- HIDE TASKBAR IF NOT FLOATING 
@@ -849,13 +865,30 @@ end)
 -- DMENU (REPLACE @ line #547)
 
 -- Secondary Display
-awful.spawn.with_shell("xrandr --output eDP-1 --primary --output DP-1-3 --left-of eDP-1")
+awful.spawn.with_shell("xrandr --output eDP-1 --primary --rate 144 --output DP-1-3 --left-of eDP-1")
+-- enable tap to click etc
 awful.spawn.with_shell("xinput set-prop \"AlpsPS/2 ALPS DualPoint TouchPad\" \"libinput Tapping Enabled\" 1")
-
 
 -- Performance Monitoring
 -- Run Bpytop
+
 -- Clock 24 hrs : Edit in the theme.lua , %H:%M to %l:%M %[]
---
+
+-- WIBAR Transparency in theme.lua
+-- s.mywibox = awful.wibar({ position = "top", screen = s, height = 25, bg = theme.bg_normal .. "65", fg = theme.fg_normal })
+
 -- -- TO DO
--- Center current window nameremove task widget
+-- Remive file menu from sublime
+-- maximized window fix
+-- transparency compoisitor
+-- PDF reader
+-- vifm or alternative
+-- play pause
+-- Highliught selcted Workspace
+-- padding above wmbar for floating effect
+-- NERDfonts
+
+-- nmcli device wifi connect BladeWiFi password ...
+-- nmcli device wifi list
+-- { rule = { name = "Sublime-Text.subl" },
+--      properties = { tag = awful.util.tagnames[5], switchtotag = true, maximized_vertical = true, maximized_horizontal = true, opacity = 0.7 } },
