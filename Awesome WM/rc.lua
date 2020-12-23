@@ -98,8 +98,14 @@ local gui_editor   = os.getenv("GUI_EDITOR") or "sublime-text.subl"
 local browser      = os.getenv("BROWSER") or "firefox"
 local scrlocker    = "slock"
 
+-- Affects which icon theme will be used by widgets that display image icons.
+local icon_themes = {
+    "linebit",        -- 1 -- Neon + outline
+    "drops",          -- 2 -- Pastel + filled
+}
+
 awful.util.terminal = terminal
-awful.util.tagnames = { "|| WEB |", " TERM |", " CHAT |", "PERF |", " EXTRA |", " EXTRA2 |", "CODE ||" }
+awful.util.tagnames = { "||  I |", " II |", " III |", " IV |", " V |", " VI |", " VII ||" }
 
 awful.layout.layouts = {
     awful.layout.suit.tile,
@@ -107,7 +113,7 @@ awful.layout.layouts = {
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
     awful.layout.suit.floating,
-    -- awful.layout.suit.fair,
+    awful.layout.suit.fair,
     -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
@@ -397,8 +403,12 @@ globalkeys = my_table.join(
               {description = "open a terminal", group = "launcher"}),
     awful.key({ modkey, "Control" }, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
-    awful.key({ modkey, "Shift"   }, "q", awesome.quit,
+    awful.key({ modkey, "Shift"   }, "l", awesome.quit,
               {description = "quit awesome", group = "awesome"}),
+    awful.key({ "Mod4", "Shift" }, "q",
+        function ()
+          awful.util.spawn("rofi -show run")
+      end),
 
     awful.key({ altkey, "Shift"   }, "l",     function () awful.tag.incmwfact( 0.05)          end,
               {description = "increase master width factor", group = "layout"}),
@@ -718,8 +728,16 @@ awful.rules.rules = {
     { rule = { class = "Firefox" },
       properties = { screen = 1, tag = awful.util.tagnames[1], opacity = 0.9 } },
 
-    { rule = { name = "Sublime-Text.subl" },
-      properties = { tag = awful.util.tagnames[5], switchtotag = true, maximized_vertical = true, maximized_horizontal = true, opacity = 0.7 } },
+    -- { rule = { name = "Sublime-Text.subl" },
+    --   properties = { tag = awful.util.tagnames[5], switchtotag = true, maximized_vertical = true, maximized_horizontal = true, opacity = 0.7 } },
+
+    { rule = { class = "Sublime" },
+
+      properties = { screen = 1, tag = awful.util.tagnames[2], opacity = 0.85 } },
+
+    { rule = { class = "Discord" },
+
+      properties = { screen = 1, tag = awful.util.tagnames[3], opacity = 0.85 } },
 
     { rule = { class = "Gimp", role = "gimp-image-window" },
           properties = { maximized = true } },
@@ -734,10 +752,6 @@ awful.rules.rules = {
     -- **************************************************
     -- CUSTOM COMMANDS
     -- **************************************************
-
-      -- Set DISCORD  to always map on the first tag on screen 1.
-    { rule = { class = "discord" },
-      properties = { screen = 1, tag = awful.util.tagnames[3] } },
 }
 -- }}}
 
@@ -828,14 +842,14 @@ awful.spawn.with_shell("sudo service network-manager start")
 beautiful.useless_gap = 7
 client.connect_signal("focus", function(c) c.border_color = "#FF0000" end)
 -- awful.spawn.with_shell("xrandr --output eDP-1 --primary --output DP-1-3 --left-of eDP-1")
--- awful.spawn.with_shell("compton")
+awful.spawn.with_shell("compton")
 -- awful.spawn.with_shell("nitrogen --set-zoom-fill --random ~/Pictures/Wallpapers/")
 awful.spawn.with_shell("nitrogen --restore &")
 -- awful.spawn.with_shell("dropbox")
 
 -- HIDE TASKBAR IF NOT FLOATING 
 client.connect_signal("property::floating", function(c)
-    if c.floating then
+    if c.floating or c.fair then
         awful.titlebar.show(c)
     else
         awful.titlebar.hide(c)
@@ -843,7 +857,7 @@ client.connect_signal("property::floating", function(c)
 end)
 
 client.connect_signal("manage", function(c)
-    if c.floating or c.first_tag.layout.name == "floating" then
+    if c.floating or c.first_tag.layout.name == "floating" or c.first_tag.layout.name == "fairv" then
         awful.titlebar.show(c)
     else
         awful.titlebar.hide(c)
@@ -872,23 +886,27 @@ awful.spawn.with_shell("xinput set-prop \"AlpsPS/2 ALPS DualPoint TouchPad\" \"l
 -- Performance Monitoring
 -- Run Bpytop
 
+-- -- DONE
 -- Clock 24 hrs : Edit in the theme.lua , %H:%M to %l:%M %[]
 
 -- WIBAR Transparency in theme.lua
 -- s.mywibox = awful.wibar({ position = "top", screen = s, height = 25, bg = theme.bg_normal .. "65", fg = theme.fg_normal })
 
+-- vifm or alternative
+-- transparency compoisitor
+
 -- -- TO DO
 -- Remive file menu from sublime
 -- maximized window fix
--- transparency compoisitor
--- PDF reader
--- vifm or alternative
 -- play pause
 -- Highliught selcted Workspace
 -- padding above wmbar for floating effect
+
 -- NERDfonts
 
 -- nmcli device wifi connect BladeWiFi password ...
 -- nmcli device wifi list
 -- { rule = { name = "Sublime-Text.subl" },
 --      properties = { tag = awful.util.tagnames[5], switchtotag = true, maximized_vertical = true, maximized_horizontal = true, opacity = 0.7 } },
+
+-- Added lines 406-409 for Rofi 
