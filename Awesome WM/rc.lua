@@ -105,7 +105,8 @@ local icon_themes = {
 }
 
 awful.util.terminal = terminal
-awful.util.tagnames = { "||  I |", " II |", " III |", " IV |", " V |", " VI |", " VII ||" }
+awful.util.tagnames = { "A", "W", "E", "S", "O", "M", "E" }
+-- awful.tag({ },
 
 awful.layout.layouts = {
     awful.layout.suit.tile,
@@ -733,7 +734,8 @@ awful.rules.rules = {
 
     { rule = { class = "Sublime" },
 
-      properties = { screen = 1, tag = awful.util.tagnames[2], opacity = 0.85 } },
+      -- properties = { screen = 1, tag = awful.util.tagnames[2], opacity = 0.85 } },
+      properties = { screen = 1, opacity = 0.9 } },
 
     { rule = { class = "Discord" },
 
@@ -879,6 +881,7 @@ end)
 -- DMENU (REPLACE @ line #547)
 
 -- Secondary Display
+awful.spawn.with_shell("xrandr --auto") -- fixes display disconnect
 awful.spawn.with_shell("xrandr --output eDP-1 --primary --rate 144 --output DP-1-3 --left-of eDP-1")
 -- enable tap to click etc
 awful.spawn.with_shell("xinput set-prop \"AlpsPS/2 ALPS DualPoint TouchPad\" \"libinput Tapping Enabled\" 1")
@@ -901,6 +904,11 @@ awful.spawn.with_shell("xinput set-prop \"AlpsPS/2 ALPS DualPoint TouchPad\" \"l
 -- play pause
 -- Highliught selcted Workspace
 -- padding above wmbar for floating effect
+-- -- https://github.com/Elv13/tyrannical
+-- https://github.com/streetturtle/awesome-wm-widgets/tree/master/cpu-widget
+-- https://github.com/streetturtle/awesome-wm-widgets/tree/master/weather-widget
+-- https://github.com/intrntbrn/smart_borders
+
 
 -- NERDfonts
 
@@ -908,5 +916,3 @@ awful.spawn.with_shell("xinput set-prop \"AlpsPS/2 ALPS DualPoint TouchPad\" \"l
 -- nmcli device wifi list
 -- { rule = { name = "Sublime-Text.subl" },
 --      properties = { tag = awful.util.tagnames[5], switchtotag = true, maximized_vertical = true, maximized_horizontal = true, opacity = 0.7 } },
-
--- Added lines 406-409 for Rofi 
