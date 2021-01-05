@@ -105,7 +105,10 @@ local icon_themes = {
 }
 
 awful.util.terminal = terminal
-awful.util.tagnames = { "A", "W", "E", "S", "O", "M", "E" }
+-- awful.util.tagnames = { "(╯, ""°□", "°）╯", "︵ ", "┻━┻"} 
+awful.util.tagnames = { "∂", "∆", "∈", "⍵", "∬", "∞" }
+-- awful.util.tagnames = { "🌍", "☕", "⛺", "⭕", "⚡", "⭐" }
+-- awful.tag({ },
 -- awful.tag({ },
 
 awful.layout.layouts = {
@@ -818,12 +821,12 @@ client.connect_signal("request::titlebars", function(c)
         },
         layout = wibox.layout.align.horizontal
     }
--- end)
+end)
 
 -- -- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    c:emit_signal("request::activate", "mouse_enter", {raise = vi_focus})
-end)
+-- client.connect_signal("mouse::enter", function(c)
+--     c:emit_signal("request::activate", "mouse_enter", {raise = vi_focus})
+-- end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
@@ -842,7 +845,7 @@ awful.spawn.with_shell("sudo service network-manager start")
 
 
 beautiful.useless_gap = 7
-client.connect_signal("focus", function(c) c.border_color = "#00FFAA" end)
+client.connect_signal("focus", function(c) c.border_color = "#FF0000" end)
 -- awful.spawn.with_shell("xrandr --output eDP-1 --primary --output DP-1-3 --left-of eDP-1")
 awful.spawn.with_shell("compton")
 -- awful.spawn.with_shell("nitrogen --set-zoom-fill --random ~/Pictures/Wallpapers/")
@@ -881,7 +884,6 @@ end)
 -- DMENU (REPLACE @ line #547)
 
 -- Secondary Display
-awful.spawn.with_shell("xrandr -s 0") -- fixes display disconnect
 awful.spawn.with_shell("xrandr --auto") -- fixes display disconnect
 awful.spawn.with_shell("xrandr --output eDP-1 --primary --rate 144 --output DP-1-3 --left-of eDP-1")
 -- enable tap to click etc
