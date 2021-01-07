@@ -90,7 +90,8 @@ local themes = {
 local chosen_theme = themes[11]
 local modkey       = "Mod4"
 local altkey       = "Mod1"
-local terminal     = "x-terminal-emulator"
+-- local terminal     = "x-terminal-emulator"
+local terminal     = "st"
 local vi_focus     = false -- vi-like client focus - https://github.com/lcpz/awesome-copycats/issues/275
 local cycle_prev   = true -- cycle trough all previous client or just the first -- https://github.com/lcpz/awesome-copycats/issues/274
 local editor       = os.getenv("EDITOR") or "nano"
@@ -845,7 +846,7 @@ awful.spawn.with_shell("sudo service network-manager start")
 
 
 beautiful.useless_gap = 7
-client.connect_signal("focus", function(c) c.border_color = "#FF0000" end)
+client.connect_signal("focus", function(c) c.border_color = "#329D9C" end)
 -- awful.spawn.with_shell("xrandr --output eDP-1 --primary --output DP-1-3 --left-of eDP-1")
 awful.spawn.with_shell("compton")
 -- awful.spawn.with_shell("nitrogen --set-zoom-fill --random ~/Pictures/Wallpapers/")
