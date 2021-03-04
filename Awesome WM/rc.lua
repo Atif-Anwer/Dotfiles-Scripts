@@ -107,7 +107,7 @@ local icon_themes = {
 
 awful.util.terminal = terminal
 -- awful.util.tagnames = { "(╯, ""°□", "°）╯", "︵ ", "┻━┻"} 
-awful.util.tagnames = { "∂", "∆", "∈", "⍵", "∬", "∞" }
+awful.util.tagnames = { "∂", "∆", "∈", "ψ", "π", "∞", "λ", "μ", "φ"}
 -- awful.util.tagnames = { "🌍", "☕", "⛺", "⭕", "⚡", "⭐" }
 -- awful.tag({ },
 -- awful.tag({ },
@@ -885,11 +885,10 @@ end)
 -- DMENU (REPLACE @ line #547)
 
 -- Secondary Display
-awful.spawn.with_shell("xrandr --auto") -- fixes display disconnect
-awful.spawn.with_shell("xrandr --output eDP-1 --primary --rate 144 --output DP-1-3 --left-of eDP-1")
+awful.spawn.with_shell("bash Documents/screen_reset.sh") -- fixes display disconnect
 -- enable tap to click etc
 awful.spawn.with_shell("xinput set-prop \"AlpsPS/2 ALPS DualPoint TouchPad\" \"libinput Tapping Enabled\" 1")
-
+awful.spawn.with_shell("dropbox start") -- start dropbox
 -- Performance Monitoring
 -- Run Bpytop
 
