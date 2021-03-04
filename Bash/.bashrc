@@ -47,12 +47,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+    # We have color support; assume it's compliant with Ecma-48
+    # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+    # a case would tend to support setf rather than setaf.)
+    color_prompt=yes
     else
-	color_prompt=
+    color_prompt=
     fi
 fi
 
@@ -135,7 +135,7 @@ if [[ $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
 
-###	NEOFETCH
+### NEOFETCH
 
 echo
 neofetch
@@ -153,3 +153,32 @@ uptime   # Needs: 'sudo apt-get install lsscsi'
 # free -m
 
 ### EOF2 ###
+
+# eval "$(starship init bash)"
+
+### EOF 3
+
+export SPICETIFY_INSTALL="/home/aanwer/spicetify-cli"
+export PATH="$SPICETIFY_INSTALL:$PATH"
+
+### EOF 4
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/aanwer/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/aanwer/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/aanwer/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/aanwer/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+
+source /home/aanwer/.config/broot/launcher/bash/br
+# eval "$(starship init bash)"
+alias ls='exa --long --header --git'
+alias fd=fdfind
