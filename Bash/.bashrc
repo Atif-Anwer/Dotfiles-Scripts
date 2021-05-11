@@ -158,8 +158,8 @@ uptime   # Needs: 'sudo apt-get install lsscsi'
 
 ### EOF 3
 
-export SPICETIFY_INSTALL="/home/aanwer/spicetify-cli"
-export PATH="$SPICETIFY_INSTALL:$PATH"
+# export SPICETIFY_INSTALL="/home/aanwer/spicetify-cli"
+# export PATH="$SPICETIFY_INSTALL:$PATH"
 
 ### EOF 4
 # >>> conda initialize >>>
@@ -178,7 +178,13 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 
-source /home/aanwer/.config/broot/launcher/bash/br
+# source /home/aanwer/.config/broot/launcher/bash/br
 # eval "$(starship init bash)"
-alias ls='exa --long --header --git'
+alias ls='exa --long --header --git --color auto --icons -a -s type'
+alias ll='exa --color always --icons -a -s type'
 alias fd=fdfind
+alias cat='batcat --theme=DarkNeon'
+
+# NVIDIA CUDA Toolkit
+export PATH=/usr/local/cuda-11.3/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-11.3/lib64
