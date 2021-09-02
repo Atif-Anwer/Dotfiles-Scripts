@@ -177,16 +177,40 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar
 	{
-#output DP-4
+	output DP-4
 	position top
 	#status_command i3status --config ~/.i3status-small.conf
 	#status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
 	workspace_buttons yes
 	workspace_min_width 40
 	tray_output Dp-4
-	output primary
-	tray_output none
 	font pango:JetBrains Mono 12
+	separator_symbol ⁞
+	colors {
+        background #2f343f
+        statusline #2f343f
+        separator #4b5262
+
+        # colour of border, background, and text
+        focused_workspace       #2f343f #bf616a #d8dee8
+        active_workspace        #2f343f #2f343f #d8dee8
+        inactive_workspace      #2f343f #2f343f #d8dee8
+        urgent_workspacei       #2f343f #ebcb8b #2f343f
+    }
+	i3bar_command i3bar --transparency
+	status_command i3status
+}
+
+bar
+	{
+	output HDMI-0
+	position top
+	#status_command i3status --config ~/.i3status-small.conf
+	#status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
+	workspace_buttons yes
+	workspace_min_width 40
+	tray_output HDMI-0
+	font pango:JetBrains Mono 8
 	separator_symbol ⁞
 	colors {
         background #2f343f
