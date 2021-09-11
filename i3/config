@@ -100,25 +100,25 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 # switch to workspace
-bindsym $mod+1 workspace A ☯
-bindsym $mod+2 workspace B ☀
-bindsym $mod+3 workspace C ♞
-bindsym $mod+4 workspace D ᚛
-bindsym $mod+5 workspace E ♜
-bindsym $mod+6 workspace F ★
-bindsym $mod+7 workspace G ☢
+bindsym $mod+1 workspace 1A ☯
+bindsym $mod+2 workspace 2B ☀
+bindsym $mod+3 workspace 3C ♞
+bindsym $mod+4 workspace 4D ᚛
+bindsym $mod+5 workspace 5E ♜
+bindsym $mod+6 workspace 6F ★
+bindsym $mod+7 workspace 7G ☢
 bindsym $mod+8 workspace Random
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace A ☯
-bindsym $mod+Shift+2 move container to workspace B ☀
-bindsym $mod+Shift+3 move container to workspace C ♞
-bindsym $mod+Shift+4 move container to workspace D ᚛
-bindsym $mod+Shift+5 move container to workspace E ♜
-bindsym $mod+Shift+6 move container to workspace F ★
-bindsym $mod+Shift+7 move container to workspace G ☢
+bindsym $mod+Shift+1 move container to workspace 1A ☯
+bindsym $mod+Shift+2 move container to workspace 2B ☀
+bindsym $mod+Shift+3 move container to workspace 3C ♞
+bindsym $mod+Shift+4 move container to workspace 4D ᚛
+bindsym $mod+Shift+5 move container to workspace 5E ♜
+bindsym $mod+Shift+6 move container to workspace 6F ★
+bindsym $mod+Shift+7 move container to workspace 7G ☢
 bindsym $mod+Shift+8 move container to workspace Random
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
@@ -184,7 +184,7 @@ bar
 	workspace_buttons yes
 	workspace_min_width 40
 	tray_output Dp-4
-	font pango:JetBrains Mono 12
+	font pango:JetBrains Mono 6
 	separator_symbol ⁞
 	colors {
         background #2f343f
@@ -251,7 +251,7 @@ assign [class="pcmanfm"] FileManager 
 for_window [title="alsamixer"] floating enable border pixel 1
 for_window [class="Clipgrab"] floating enable
 for_window [title="File Transfer*"] floating enable
-for_window [class="Galculator"] floating enable border pixel 1
+for_window [class="Calculator"] floating enable border pixel 1
 for_window [class="GParted"] floating enable border normal
 for_window [title="i3_help"] floating enable sticky enable border normal
 for_window [class="Lightdm-gtk-greeter-settings"] floating enable
@@ -282,7 +282,7 @@ for_window [urgent=latest] focus
 #exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id nitrogen --restore
 #; sleep 1; picom --config ~/.config/picom/picom.conf
-exec --no-startup-id numlockx off
+exec --no-startup-id numlockx on
 exec --no-startup-id nm-applet
 #exec --no-startup-id xfce4-power-manager
 # exec --no-startup-id xautolock -time 10 -locker blurlock
@@ -292,13 +292,6 @@ exec xinput set-prop 19 305 1
 
 # Theme colors
 # class                   border  backgr. text    indic.   child_border
-#  client.focused          #556064 #556064 #80FFF9 #FDF6E3
-#  client.focused_inactive #2F3D44 #2F3D44 #AD69AF #454948
-#  client.unfocused        #2F3D44 #2F3D44 #AD69AF #454948
-#  client.urgent           #CB4B16 #FDF6E3 #AD69AF #268BD2
-#  client.placeholder      #000000 #0c0c0c #ffffff #000000 
-
-#  client.background       #2B2C2B
 client.focused              #bf616a #2f343f #d8dee8 #bf616a #d8dee8
 client.focused_inactive     #2f343f #2f343f #d8dee8 #2f343f #2f343f
 client.unfocused            #2f343f #2f343f #d8dee8 #2f343f #2f343f
@@ -344,16 +337,17 @@ exec setxkbmap us
 
 # Set resoultion
 # exec xrandr --output DP-4 --mode 2560x1600
-exec bash ~/Documents/Dotfiles-Scripts/i3/dual_screen_xrandr 
+exec bash /home/atif/Documents/Dotfiles-Scripts/Scripts/dual_screen_xrandr.sh 
 
+# Lock screen
+bindsym $mod+p exec bash  /home/atif/Documents/Dotfiles-Scripts/Scripts/lock.sh
 
 # MultimediaKeys
-# Vol up
-bindsym $mod+F3 exec --no-startup-id pactl set-sink-volume 0 +5% 
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+
 # Vol down
-bindsym $mod+F2 exec --no-startup-id pactl set-sink-volume 0 -5% 
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%- 
 #Mute
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle 
+bindsym XF86AudioMute exec amixer -D pulse sset Master 1% 
 #Play some 
 bindsym XF86AudioPlay exec playerctl play
 #Pauze the play
@@ -362,6 +356,8 @@ bindsym XF86AudioPause exec playerctl pause
 bindsym XF86AudioNext exec playerctl next
 #Previous song/chapter 
 bindsym XF86AudioPrev exec playerctl previous
+#Stop
+bindsym XF86AudioStop exec playerctl stop
 
 # Screen brightness
 #increase
