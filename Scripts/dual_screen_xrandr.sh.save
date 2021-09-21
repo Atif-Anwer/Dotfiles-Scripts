@@ -1,4 +1,0 @@
-#!/bin/sh
-xrandr --auto --output DP-4 --mode 2560x1600 --right-of HDMI-0
-xrandr --output HDMI-0 --rotate left
-"error while loading shared libraries: libopencv_core.so.2.
