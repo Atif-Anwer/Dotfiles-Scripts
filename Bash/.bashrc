@@ -158,33 +158,37 @@ uptime   # Needs: 'sudo apt-get install lsscsi'
 
 ### EOF 3
 
-# export SPICETIFY_INSTALL="/home/aanwer/spicetify-cli"
-# export PATH="$SPICETIFY_INSTALL:$PATH"
+export SPICETIFY_INSTALL="/home/atif/spicetify-cli"
+export PATH="$SPICETIFY_INSTALL:$PATH"
 
 ### EOF 4
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/aanwer/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/atif/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/aanwer/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/aanwer/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/atif/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/atif/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/aanwer/anaconda3/bin:$PATH"
+        export PATH="/home/atif/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
 
-# source /home/aanwer/.config/broot/launcher/bash/br
+# source /home/atif/.config/broot/launcher/bash/br
 # eval "$(starship init bash)"
 alias ls='exa --long --header --git --color auto --icons -a -s type'
 alias ll='exa --color always --icons -a -s type'
 alias fd=fdfind
 alias cat='batcat --theme=DarkNeon'
+alias cpuavail='cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_available_governors'
+alias cpushow='cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
+alias cpuperf='echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
 
 # NVIDIA CUDA Toolkit
 export PATH=/usr/local/cuda-11.3/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/cuda-11.3/lib64
+source ~/.bash_completion/alacritty
