@@ -19,6 +19,14 @@ launch_bar() {
 	else
 		polybar -q main -c "$dir/$style/config.ini" &	
 	fi
+
+	if type "xrandr"; then
+		for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
+			MONITOR=$m polybar --reload example &
+		done
+	else
+		polybar --reload example &
+	fi
 }
 
 if [[ "$1" == "--material" ]]; then

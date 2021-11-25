@@ -304,6 +304,7 @@ exec setxkbmap us
 # Set resoultion
 # exec xrandr --output DP-4 --mode 2560x1600
 exec bash /home/atif/Documents/Dotfiles-Scripts/Scripts/dual_screen_xrandr.sh
+exec xinput set-prop "MSFT0001:00 06CB:CE78 Touchpad" "libinput Tapping Enabled" 1
 
 # Lock screen
 bindsym $mod+p exec bash  /home/atif/Documents/Dotfiles-Scripts/Scripts/lock.sh
