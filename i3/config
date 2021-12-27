@@ -215,6 +215,33 @@ bar
 	status_command i3status
 }
 
+bar
+	{
+    # FOR DELL MONITOR
+	output DP-2
+	position top
+	#status_command i3status --config ~/.i3status-small.conf
+	status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
+	workspace_buttons yes
+	workspace_min_width 40
+	tray_output HDMI-0
+	font pango:JetBrains Mono 8
+	separator_symbol ⁞
+	colors {
+        background #2f343f
+        statusline #2f343f
+        separator #4b5262
+
+        # colour of border, background, and text
+        focused_workspace       #2f343f #bf616a #d8dee8
+        active_workspace        #2f343f #2f343f #d8dee8
+        inactive_workspace      #2f343f #2f343f #d8dee8
+        urgent_workspacei       #2f343f #ebcb8b #2f343f
+    }
+	i3bar_command i3bar --transparency
+	status_command i3status
+}
+
 # execute Polybar
 # exec_always --no-startup-id $HOME/.config/polybar/launch.sh --forest
 # exec_always --no-startup-id ~/home/atif/Documents/Dotfiles-Scripts/Polybar/polybar.sh &
@@ -287,6 +314,7 @@ mode "EXIT OPTIONS: [l]ogout, [r]eboot, [s]hutdown, loc[k]" {
     bindsym Return mode "default"
   }
 bindsym $mod+Shift+x mode "EXIT OPTIONS: [l]ogout, [r]eboot, [s]hutdown, loc[k]"
+# bindsym $mod+Shift+x exec "i3-nagbar -t warning -m 'EXIT OPTIONS' -b '[l]ogout' 'mode l' -b '[r]eboot' 'mode b'"
 # bindsym k exec i3lock; mode "default"
 
 
@@ -294,7 +322,7 @@ bindsym $mod+Shift+x mode "EXIT OPTIONS: [l]ogout, [r]eboot, [s]hutdown, loc[k]"
 # ======================================================
 
 # set display hdmi-0
-exec xrandr --output DP-4 --primary --mode 1920x1080
+# exec xrandr --output DP-4 --primary --mode 1920x1080
 #xrandr --auto --output DP-4 --mode 2560x1600 --right-of HDMI-0
 
 # Screensaver Settings
@@ -305,7 +333,8 @@ exec setxkbmap us
 
 # Set resoultion
 # exec xrandr --output DP-4 --mode 2560x1600
-exec bash /home/atif/Documents/Dotfiles-Scripts/Scripts/dual_screen_xrandr.sh
+# exec bash /home/atif/Documents/Dotfiles-Scripts/Scripts/dual_screen_xrandr.sh
+exec bash /home/atif/Documents/Dotfiles-Scripts/Scripts/screen_reset_60hz_landscapeRight.sh
 exec xinput set-prop "MSFT0001:00 06CB:CE78 Touchpad" "libinput Tapping Enabled" 1
 
 # Lock screen
