@@ -256,7 +256,7 @@ for_window [class="Pavucontrol"] floating enable
 for_window [class="Pavucontrol"] resize shrink left 100, resize shrink right 100, resize shrink down 50, resize shrink up 50
 
 # Assign programs to specific workspace
-assign [class="firefox"] Browser 
+assign [class="firefox"] 1 ☯
 assign [class="pcmanfm"] FileManager 
 
 # Open specific applications in floating mode
