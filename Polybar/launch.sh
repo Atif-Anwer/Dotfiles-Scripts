@@ -17,21 +17,23 @@ launch_bar() {
 	elif [[ "$style" == "pwidgets" ]]; then
 		bash "$dir"/pwidgets/launch.sh --main
 	else
-		polybar -q main -c "$dir/$style/config.ini" &	
-	fi
-
-	if type "xrandr"; then
-		for m in $(xrandr --query | grep " connected" | cut -d" " -f1); do
-			MONITOR=$m polybar --reload example &
+		# polybar -q main -c "$dir/$style/config.ini" &
+		for m in $(polybar --list-monitors | cut -d":" -f1); do
+    			MONITOR=$m polybar -q main -c "$dir/$style/config.ini" &
 		done
-	else
-		polybar --reload example &
 	fi
+}
+
+multiple_monitors() {
+	for m in $(polybar --list-monitors | cut -d":" -f1); do
+    		MONITOR=$m polybar --reload launch_bar &
+	done
 }
 
 if [[ "$1" == "--material" ]]; then
 	style="material"
 	launch_bar
+	multiple_monitors
 
 elif [[ "$1" == "--shades" ]]; then
 	style="shades"
