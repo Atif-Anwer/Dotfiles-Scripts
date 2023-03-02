@@ -41,3 +41,11 @@ alias cat='bat --theme=DarkNeon'
 alias cpuavail='cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_available_governors'
 alias cpushow='cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
 alias cpuperf='echo performance | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor'
+
+
+### CUDA Toolkit
+set -gx PATH /usr/local/cuda-11.4/bin:$PATH
+set -gx LD_LIBRARY_PATH /usr/local/cuda-11.4/lib64
+set -gx SMPL_LOCATION /home/atif/Documents/Datasets/SMPL
+set -gx PYTHONPATH $PYTHONPATH:$SMPL_LOCATION
+set -gx EDITOR $HOME/installers/nvim-linux64/bin/nvim
