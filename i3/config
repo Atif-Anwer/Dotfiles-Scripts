@@ -292,7 +292,7 @@ for_window [class="Xfburn"] floating enable
 for_window [urgent=latest] focus
 
 # Autostart applications
-exec --no-startup-id nitrogen --restore
+exec --no-startup-id nitrogen --restore --force-setter=xinerama
 exec --no-startup-id numlockx on
 exec --no-startup-id nm-applet
 exec_always --no-startup-id fix_xcursor
@@ -341,8 +341,9 @@ exec setxkbmap us
 # Set resoultion
 # exec xrandr --output DP-4 --mode 2560x1600
 # exec bash /home/atif/Documents/Dotfiles-Scripts/Scripts/dual_screen_xrandr.sh
-exec bash /home/atif/.screenlayout/Apeira_vertical.sh
+# exec bash /home/atif/.screenlayout/Apeira_vertical.sh
 # exec bash /home/atif/Documents/Dotfiles-Scripts/Scripts/screen_reset_60hz_landscapeRight.sh
+exec bash /home/atif/.screenlayout/45RdM.sh
 exec xinput set-prop "MSFT0001:00 06CB:CE78 Touchpad" "libinput Tapping Enabled" 1
 
 # Lock screen
@@ -374,6 +375,6 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20
 # ======================================================
 
 # for Keychron K6
-exec_always --no-startup-id bash echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode
+exec_always --no-startup-id echo 0 | sudo tee /sys/module/hid_apple/parameters/fnmode
 
 exec_always --no-startup-id dunst -config ~/.config/dunst/dunstrc
