@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Change to config directory to ensure proper module loading
+cd "$CONFIG_DIR"
+
+# Load the sketchybar-package and prepare the helper binaries, then run init
+/opt/homebrew/bin/lua -e "
+  package.path = package.path .. ';$CONFIG_DIR/?.lua;$CONFIG_DIR/?/init.lua'
+  require('helpers')
+  require('init')
+"
