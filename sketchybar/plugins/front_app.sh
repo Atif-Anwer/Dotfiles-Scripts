@@ -1,13 +1,26 @@
-#!/bin/bash
+#!/bin/sh
 
-CONFIG_DIR="${CONFIG_DIR:-$HOME/.config/sketchybar}"
-source "$CONFIG_DIR/helpers/icon_map.sh"
+# Some events send additional information specific to the event in the $INFO
+# variable. E.g. the front_app_switched event sends the name of the newly
+# focused application in the $INFO variable:
+# https://felixkratz.github.io/SketchyBar/config/events#events-and-scripting
+
+AEROSPACE_FOCUSED_MONITOR_NO=$(aerospace list-workspaces --focused)
+AEROSPACE_LIST_OF_WINDOWS_IN_FOCUSED_MONITOR=$(aerospace list-windows --workspace $AEROSPACE_FOCUSED_MONITOR_NO | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
 
 if [ "$SENDER" = "front_app_switched" ]; then
-  __icon_map "$INFO"
-  if [ "$icon_result" != "" ]; then
-    sketchybar --set "$NAME" label="$INFO" icon="$icon_result"
+  #echo name:$NAME INFO: $INFO SENDER: $SENDER, SID: $SID >> ~/aaaa
+  sketchybar --set "$NAME" label="$INFO" icon.background.image="app.$INFO" icon.background.image.scale=0.8
+
+  apps=$AEROSPACE_LIST_OF_WINDOWS_IN_FOCUSED_MONITOR
+  icon_strip=" "
+  if [ "${apps}" != "" ]; then
+    while read -r app
+    do
+      icon_strip+=" $($CONFIG_DIR/plugins/icon_map.sh "$app")"
+    done <<< "${apps}"
   else
-    sketchybar --set "$NAME" label="$INFO" icon=":default:"
+    icon_strip=" —"
   fi
+  sketchybar --set space.$AEROSPACE_FOCUSED_MONITOR_NO label="$icon_strip"
 fi
