@@ -27,6 +27,8 @@ for i in {1..9}; do
     background.color=$BACKGROUND_1
     background.border_color=$BACKGROUND_2
     script="$PLUGIN_DIR/space.sh"
+    click_script="aerospace workspace $sid"
+
   )
 
   sketchybar --add space space.$sid left \

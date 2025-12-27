@@ -28,7 +28,7 @@ bar=(
   position=top
   sticky=on
   x_offset=0
-  y_offset=0
+  y_offset=5
   padding_right=10
   icon.padding_right=0
   icon.padding_left=0
@@ -76,6 +76,7 @@ sketchybar --default "${defaults[@]}"
 
 
 # Left
+source "applemenu.sh"
 source "$ITEM_DIR/spaces.sh"
 source "$ITEM_DIR/front_app.sh"
 

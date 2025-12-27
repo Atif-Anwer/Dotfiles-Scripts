@@ -16,34 +16,34 @@
 # export BG2=0xff414550
 
 ### Gruvbox
-export BLACK=0xff282828
-export WHITE=0xffebdbb2
-export RED=0xfffb4934
-export GREEN=0xffb8bb26
-export BLUE=0xff83a598
-export YELLOW=0xfffe8019
-export ORANGE=0xffd3869b
-export MAGENTA=0xffd3869b
-export GREY=0xff7c6f64
-export TRANSPARENT=0x00000000
-export BG0=0xff282828
-export BG1=0xff3c3836
-export BG2=0xff504945
+# export BLACK=0xff282828
+# export WHITE=0xffebdbb2
+# export RED=0xfffb4934
+# export GREEN=0xffb8bb26
+# export BLUE=0xff83a598
+# export YELLOW=0xfffe8019
+# export ORANGE=0xffd3869b
+# export MAGENTA=0xffd3869b
+# export GREY=0xff7c6f64
+# export TRANSPARENT=0x00000000
+# export BG0=0xff282828
+# export BG1=0xff3c3836
+# export BG2=0xff504945
 
 # ### Catppuccin
-# export BLACK=0xff181926
-# export WHITE=0xffcad3f5
-# export RED=0xffed8796
-# export GREEN=0xffa6da95
-# export BLUE=0xff8aadf4
-# export YELLOW=0xffeed49f
-# export ORANGE=0xfff5a97f
-# export MAGENTA=0xffc6a0f6
-# export GREY=0xff939ab7
-# export TRANSPARENT=0x00000000
-# export BG0=0xff1e1e2e
-# export BG1=0x603c3e4f
-# export BG2=0x60494d64
+export BLACK=0xff181926
+export WHITE=0xffcad3f5
+export RED=0xffed8796
+export GREEN=0xffa6da95
+export BLUE=0xff8aadf4
+export YELLOW=0xffeed49f
+export ORANGE=0xfff5a97f
+export MAGENTA=0xffc6a0f6
+export GREY=0xff939ab7
+export TRANSPARENT=0x00000000
+export BG0=0xff1e1e2e
+export BG1=0x603c3e4f
+export BG2=0x60494d64
 
 export BATTERY_1=0xffa6da95
 export BATTERY_2=0xffeed49f
