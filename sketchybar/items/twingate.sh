@@ -1,7 +1,7 @@
 #!/bin/bash
 
 sketchybar --add item twingate right \
-           --set twingate icon="$($CONFIG_DIR/plugins/icon_map_fn.sh "Twingate")" \
+           --set twingate icon="$($CONFIG_DIR/plugins/icon_map.sh "Twingate")" \
                           icon.font="sketchybar-app-font:Regular:16.0" \
                           icon.width=16 \
                           background.drawing=on \

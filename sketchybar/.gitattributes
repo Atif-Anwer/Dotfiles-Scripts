@@ -1,0 +1,6 @@
+* text=auto eol=lf
+
+# Ensure SketchyBar config/scripts always use LF
+*.sh text eol=lf
+sketchybarrc text eol=lf
+
