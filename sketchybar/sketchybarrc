@@ -64,6 +64,7 @@ sketchybar --add bracket left_pill_bg apple_logo space.1 space.2 space.3 space.4
 # -- Right Side Items --
 source $ITEM_DIR/lock.sh
 source $ITEM_DIR/calendar.sh
+source $ITEM_DIR/network.sh
 source $ITEM_DIR/volume.sh
 source $ITEM_DIR/battery.sh
 source $ITEM_DIR/cpu.sh
@@ -72,14 +73,15 @@ source $ITEM_DIR/clipboard.sh
 # source $ITEM_DIR/twingate.sh
 # source $ITEM_DIR/music.sh
 
-# Right section unified background
-sketchybar --add bracket right_pill_bg calendar lock volume battery cpu memory clipboard \
+# Right section unified background (including network monitor)
+sketchybar --add bracket right_pill_bg lock calendar network.download network.upload volume battery cpu memory clipboard \
            --set right_pill_bg background.color=0xcc1e1e2e \
                                background.corner_radius=20 \
                                background.height=36 \
                                background.padding_left=3 \
                                background.padding_right=3 \
-                               background.blur_radius=20
+                               background.blur_radius=20 \
+                               background.drawing=on
 
 
 ##### Finalizing Setup #####

@@ -44,7 +44,9 @@ export WHITE=0xffffffff
 # export ACCENT_COLOR=0xfff7fc17
 
 # -- Catppuccin Mocha Scheme --
-export BAR_COLOR=0x001e1e2e
+# export BAR_COLOR=0x001e1e2e
+export BAR_COLOR=0x000b5394
+
 export ITEM_BG_COLOR=0xee585b70
 export ACCENT_COLOR=0xfff5e0dc
 

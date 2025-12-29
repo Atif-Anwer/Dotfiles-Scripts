@@ -130,7 +130,7 @@ function __icon_map() {
         icon_result=":creative_cloud:"
         ;;
    "Cursor"* | "cursor")
-        icon_result=":code:"
+        icon_result=":cursor:"
         ;;
    "Cypress")
         icon_result=":cypress:"
