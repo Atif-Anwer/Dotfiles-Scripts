@@ -15,7 +15,6 @@ set_space_label() {
   sketchybar --set $NAME icon="$@"
 }
 
-# echo plugin_space.sh $SENDER >> ~/aaaa
 case "$SENDER" in
   *) update
   ;;

@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
-
+# The icon codes (like :slack:, :cursor_ide:) are part of the sketchybar-app-font. To see all available icons:
+# Browse the icon font online:
+# Visit: https://github.com/kvndrsslr/sketchybar-app-font
+# Check the icons page to see all available codes
+# Test if an icon exists:
+#    /Users/atif/.config/sketchybar/plugins/icon_map.sh "App Name"
+# Step 5: Common Icon Naming Patterns
 ### START-OF-ICON-MAP
 function __icon_map() {
     case "$1" in
@@ -123,6 +129,9 @@ function __icon_map() {
    "Creative Cloud")
         icon_result=":creative_cloud:"
         ;;
+   "Cursor"* | "cursor")
+        icon_result=":code:"
+        ;;
    "Cypress")
         icon_result=":cypress:"
         ;;
@@ -203,6 +212,9 @@ function __icon_map() {
         ;;
    "System Preferences" | "System Settings" | "系统设置" | "Réglages Système")
         icon_result=":gear:"
+        ;;
+   "Ghostty")
+        icon_result=":ghostty:"
         ;;
    "GitHub Desktop")
         icon_result=":git_hub:"
@@ -531,8 +543,11 @@ function __icon_map() {
    "Spotlight")
         icon_result=":spotlight:"
         ;;
-   "Sublime Text")
+   "Sublime Text"* | "sublime text"*)
         icon_result=":sublime_text:"
+        ;;
+   "Sublime Merge"* | "sublime merge"*)
+        icon_result=":git_hub:"
         ;;
    "Tana")
         icon_result=":tana:"
@@ -653,3 +668,4 @@ function __icon_map() {
 ### END-OF-ICON-MAP
 __icon_map "$1"
 echo "$icon_result"
+

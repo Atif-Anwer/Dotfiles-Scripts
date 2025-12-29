@@ -1,47 +1,47 @@
-#!/bin/bash
+#!/bin/sh
 
-WIDTH=100
+# The volume_change event supplies a $INFO variable in which the current volume
+# percentage is passed to the script.
 
-volume_change() {
-  source "$CONFIG_DIR/icons.sh"
-  case $INFO in
-    [6-9][0-9]|100) ICON=$VOLUME_100
-    ;;
-    [3-5][0-9]) ICON=$VOLUME_66
-    ;;
-    [1-2][0-9]) ICON=$VOLUME_33
-    ;;
-    [1-9]) ICON=$VOLUME_10
-    ;;
-    0) ICON=$VOLUME_0
-    ;;
-    *) ICON=$VOLUME_100
+# Helper function to get volume icon (eliminates duplication)
+get_volume_icon() {
+  local volume=$1
+  case $volume in
+    [6-9][0-9]|100) echo "􀊩" ;;
+    [3-5][0-9]) echo "􀊥" ;;
+    [1-9]|[1-2][0-9]) echo "􀊡" ;;
+    *) echo "􀊣" ;;
   esac
-
-  sketchybar --set volume_icon label=$ICON \
-             --set $NAME slider.percentage=$INFO
-
-  INITIAL_WIDTH="$(sketchybar --query $NAME | jq -r ".slider.width")"
-  if [ "$INITIAL_WIDTH" -eq "0" ]; then
-    sketchybar --animate tanh 30 --set $NAME slider.width=$WIDTH 
-  fi
-
-  sleep 2
-
-  # Check wether the volume was changed another time while sleeping
-  FINAL_PERCENTAGE="$(sketchybar --query $NAME | jq -r ".slider.percentage")"
-  if [ "$FINAL_PERCENTAGE" -eq "$INFO" ]; then
-    sketchybar --animate tanh 30 --set $NAME slider.width=0
-  fi
 }
 
-mouse_clicked() {
-  osascript -e "set volume output volume $PERCENTAGE"
-}
+if [ "$SENDER" = "volume_change" ]; then
+  VOLUME=$INFO
+  ICON=$(get_volume_icon $VOLUME)
+  sketchybar --set $NAME icon="$ICON" label="$VOLUME%"
+fi
 
-case "$SENDER" in
-  "volume_change") volume_change
-  ;;
-  "mouse.clicked") mouse_clicked
-  ;;
-esac
+# Handle mouse scroll events for volume control
+if [ "$SENDER" = "mouse.scrolled" ]; then
+  # Get current volume
+  CURRENT_VOLUME=$(osascript -e "output volume of (get volume settings)")
+  
+  # Adjust volume based on scroll direction
+  if [ "$SCROLL_DELTA" -gt 0 ]; then
+    # Scroll up - increase volume
+    NEW_VOLUME=$((CURRENT_VOLUME + 5))
+    if [ $NEW_VOLUME -gt 100 ]; then
+      NEW_VOLUME=100
+    fi
+  else
+    # Scroll down - decrease volume
+    NEW_VOLUME=$((CURRENT_VOLUME - 5))
+    if [ $NEW_VOLUME -lt 0 ]; then
+      NEW_VOLUME=0
+    fi
+  fi
+  
+  # Set new volume and update display
+  osascript -e "set volume output volume $NEW_VOLUME"
+  ICON=$(get_volume_icon $NEW_VOLUME)
+  sketchybar --set $NAME icon="$ICON" label="$NEW_VOLUME%"
+fi

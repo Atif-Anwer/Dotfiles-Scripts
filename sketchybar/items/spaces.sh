@@ -1,12 +1,9 @@
 #!/bin/sh
 
-#SPACE_ICONS=("1" "2" "3" "4")
-
 # Destroy space on right click, focus space on left click.
 # New space by left clicking separator (>)
 
 sketchybar --add event aerospace_workspace_change
-#echo $(aerospace list-workspaces --monitor 1 --visible no --empty no) >> ~/aaaa
 
 for i in {1..9}; do
   sid=$i
@@ -16,13 +13,12 @@ for i in {1..9}; do
     icon.highlight_color=$RED
     icon.padding_left=10
     icon.padding_right=0
-    #display=active
     padding_left=2
     padding_right=2
     label.padding_right=20
     label.color=$GREY
     label.highlight_color=$WHITE
-    label.font="sketchybar-app-font:Regular:16.0"
+    label.font="sketchybar-app-font:Regular:14.0"
     label.y_offset=-1
     background.color=$BACKGROUND_1
     background.border_color=$BACKGROUND_2
@@ -53,7 +49,7 @@ done
 
 space_creator=(
   icon=􀆊
-  icon.font="$FONT:Heavy:16.0"
+  icon.font="SF Pro:Heavy:14.0"
   padding_left=10
   padding_right=8
   label.drawing=off
