@@ -43,7 +43,11 @@ inner.horizontal = 5
 inner.vertical =   5
 outer.left =       5
 outer.bottom =     5
-outer.top =        15
+outer.top = [
+    { monitor.main = 15 },      # Primary monitor (outer.top = 15)
+    { monitor.secondary = 50 }, # Secondary monitor (outer.top = 15, adjust as needed)
+    15                          # Default fallback
+]
 outer.right =      5
 
 [mode.main.binding]
@@ -168,13 +172,29 @@ run = 'layout floating'
 if.app-name-regex-substring = 'tlauncher'
 run = 'layout floating'
 
-[[on-window-detected]]
-  run = 'layout floating'
-  if.app-id = 'net.whatsapp.WhatsApp'
+# [[on-window-detected]]
+#   run = 'layout floating'
+#   if.app-id = 'net.whatsapp.WhatsApp'
 
 [[on-window-detected]]
   if.app-id = 'com.github.th-ch.youtube-music'
   run = 'move-node-to-workspace 5'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'deepl'
+run = 'layout floating'
+
+[[on-window-detected]]
+  if.app-id = 'com.apple.calculator'
+  run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'maacy'
+run = 'layout floating'
+
+[[on-window-detected]]
+  if.app-id = 'com.apple.MobileSMS'
+  run = 'layout tiling'
 
 [mode.resize.binding]
     h = 'resize width -50'
