@@ -1,5 +1,8 @@
 ### Visual configuration
 # theme = Tomorrow Night Bright
+term = xterm-ghostty
+shell-integration-features = sudo
+shell-integration-features = ssh-terminfo,ssh-env
 theme = tokyonight
 window-theme = system
 macos-titlebar-style = tabs
@@ -41,4 +44,5 @@ window-save-state = never
 
 # window-colorspace = srgb
 window-colorspace = display-p3
+custom-shader = ~/.config/ghostty/cursor.glsl
 
