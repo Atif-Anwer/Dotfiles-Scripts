@@ -1,21 +1,16 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+source "$CONFIG_DIR/plugins/workspace_label.sh"
+source "$CONFIG_DIR/plugins/workspace_focus_style.sh"
 
 update() {
-    source "$CONFIG_DIR/colors.sh"
-    COLOR=$BACKGROUND_2
-    if [ "$SELECTED" = "true" ]; then
-	COLOR=$GREY
-    fi
-    sketchybar --set space.$(aerospace list-workspaces --focused) icon.highlight=true \
-	label.highlight=true \
-	background.border_color=$GREY \
-}
-
-set_space_label() {
-  sketchybar --set $NAME icon="$@"
+  focused="$(aerospace list-workspaces --focused 2>/dev/null || true)"
+  for i in 0 {1..9}; do
+    apply_workspace_display "$i" "$focused"
+  done
+  apply_workspace_focus_styles "$focused"
 }
 
 case "$SENDER" in
-  *) update
-  ;;
+  *) update ;;
 esac

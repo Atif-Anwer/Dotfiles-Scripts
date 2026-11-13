@@ -1,51 +1,44 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-# Destroy space on right click, focus space on left click.
-# New space by left clicking separator (>)
+source "$CONFIG_DIR/plugins/workspace_label.sh"
+source "$CONFIG_DIR/colors.sh"
+source "$CONFIG_DIR/plugins/sketchybar_displays.sh"
+source "$CONFIG_DIR/plugins/workspace_focus_style.sh"
 
 sketchybar --add event aerospace_workspace_change
 
-for i in {1..9}; do
+focused="$(aerospace list-workspaces --focused 2>/dev/null || true)"
+
+for i in 0 {1..9}; do
   sid=$i
+
   space=(
-    space="$sid"
     icon="$sid"
-    icon.highlight_color=$RED
+    icon.highlight_color=$WORKSPACE_FOCUS
     icon.padding_left=10
     icon.padding_right=0
     padding_left=2
     padding_right=2
     label.padding_right=20
     label.color=$GREY
-    label.highlight_color=$WHITE
-    label.font="sketchybar-app-font:Regular:14.0"
+    label.highlight_color=$WORKSPACE_FOCUS
     label.y_offset=-1
     background.color=$BACKGROUND_1
     background.border_color=$BACKGROUND_2
-    script="$PLUGIN_DIR/space.sh"
+    script="$CONFIG_DIR/plugins/space.sh"
     click_script="aerospace workspace $sid"
-
+    display="$(sketchybar_display_ids)"
   )
 
-  sketchybar --add space space.$sid left \
-             --set space.$sid "${space[@]}" \
-             --subscribe space.$sid mouse.clicked
+  sketchybar --add item "space.$sid" left \
+    --set "space.$sid" "${space[@]}" \
+    --subscribe "space.$sid" mouse.clicked
 
-  apps=$(aerospace list-windows --workspace $sid | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
+  apply_workspace_display "$sid" "$focused"
 
-  icon_strip=" "
-  if [ "${apps}" != "" ]; then
-    while read -r app
-    do
-      icon_strip+=" $($CONFIG_DIR/plugins/icon_map.sh "$app")"
-    done <<< "${apps}"
-  else
-    icon_strip=" —"
-  fi
-
-  sketchybar --set space.$sid label="$icon_strip"
 done
 
+apply_workspace_focus_styles "$focused"
 
 space_creator=(
   icon=􀆊
@@ -57,6 +50,8 @@ space_creator=(
   icon.color=$WHITE
 )
 
-sketchybar --add item space_creator left               \
-           --set space_creator "${space_creator[@]}"   \
-           --subscribe space_creator aerospace_workspace_change
+sketchybar --add item space_creator left \
+  --set space_creator "${space_creator[@]}" \
+  --subscribe space_creator aerospace_workspace_change display_change
+
+apply_workspace_sketchybar_displays

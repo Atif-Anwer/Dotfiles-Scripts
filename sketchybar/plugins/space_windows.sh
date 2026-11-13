@@ -1,37 +1,22 @@
 #!/usr/bin/env bash
 
 source "$CONFIG_DIR/colors.sh"
+source "$CONFIG_DIR/plugins/workspace_label.sh"
+source "$CONFIG_DIR/plugins/sketchybar_displays.sh"
+source "$CONFIG_DIR/plugins/workspace_focus_style.sh"
 
-reload_workspace_icon() {
-  apps=$(aerospace list-windows --workspace "$@" | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
-
-  icon_strip=" "
-  if [ "${apps}" != "" ]; then
-    while read -r app
-    do
-      icon_strip+=" $($CONFIG_DIR/plugins/icon_map.sh "$app")"
-    done <<< "${apps}"
-  else
-    icon_strip=" —"
-  fi
-
-  sketchybar --set space.$@ label="$icon_strip"
-}
+if [ "$SENDER" = "display_change" ]; then
+  apply_workspace_sketchybar_displays
+  exit 0
+fi
 
 if [ "$SENDER" = "aerospace_workspace_change" ]; then
-  # Reload icons for all workspaces to catch window movements
-  for i in {1..9}; do
-    reload_workspace_icon "$i"
-    sketchybar --set space.$i display=active
+  fw="${AEROSPACE_FOCUSED_WORKSPACE:-$(aerospace list-workspaces --focused 2>/dev/null)}"
+
+  for i in 0 {1..9}; do
+    apply_workspace_display "$i" "$fw"
   done
+  apply_workspace_sketchybar_displays
 
-  # Update highlighting for focused workspace
-  sketchybar --set space.$AEROSPACE_FOCUSED_WORKSPACE icon.highlight=true \
-                         label.highlight=true \
-                         background.border_color=$GREY
-
-  # Remove highlighting from previous workspace
-  sketchybar --set space.$AEROSPACE_PREV_WORKSPACE icon.highlight=false \
-                         label.highlight=false \
-                         background.border_color=$BACKGROUND_2
+  apply_workspace_focus_styles "$fw"
 fi

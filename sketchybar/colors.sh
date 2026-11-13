@@ -71,3 +71,6 @@ export GREY=0xff939ab7
 export TRANSPARENT=0x00000000
 export BACKGROUND_1=0xff1e1e2e
 export BACKGROUND_2=0xff494d64
+# Active aerospace workspace pill (bright yellow-orange)
+export WORKSPACE_FOCUS=0xffffb84d
+export WORKSPACE_FOCUS_BG=0x66ffb84d

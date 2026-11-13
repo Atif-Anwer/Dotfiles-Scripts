@@ -7,11 +7,8 @@ sketchybar --add item front_app left \
                                  background.height=28 \
                                  icon.color=$WHITE \
                                  icon.font="sketchybar-app-font:Regular:12.0" \
-                                 label.color=$WHITE \
-                                 label.font="SF Pro:Semibold:12.0" \
-                                 label.padding_left=8 \
-                                 label.padding_right=8 \
-                                 icon.padding_left=8 \
-                                 icon.padding_right=8 \
+                                 label.drawing=off \
+                                 icon.padding_left=10 \
+                                 icon.padding_right=10 \
                                  script="$PLUGIN_DIR/front_app.sh"            \
            --subscribe front_app front_app_switched
