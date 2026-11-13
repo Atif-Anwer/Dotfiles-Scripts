@@ -50,11 +50,11 @@ gaps.outer.right =      5
 1 = 'main'
 2 = 'main'
 3 = 'main'
-4 = 'main'
+4 = ['U2412M', 'UltraGear', 'secondary', 2]
 5 = ['U2412M', 'UltraGear', 'secondary', 2]
 6 = ['U2412M', 'UltraGear', 'secondary', 2]
 7 = 'main'
-8 = ['U2412M', 'UltraGear', 'secondary', 2]
+8 = ['P2314H', 'UltraGear', 'secondary', 2]
 9 = ['P2314H', 'UltraGear', 3, 'secondary', 2]
 0 = ['P2314H', 'UltraGear', 3, 'secondary', 2]
 
@@ -108,6 +108,7 @@ gaps.outer.right =      5
     alt-7 = 'workspace 7'
     alt-8 = 'workspace 8'
     alt-9 = 'workspace 9'
+    alt-0 = 'workspace 0'
 
     alt-shift-1 = 'move-node-to-workspace 1'
     alt-shift-2 = 'move-node-to-workspace 2'
@@ -161,6 +162,10 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'maacy'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = 'python3.11'
 run = 'layout floating'
 
 [[on-window-detected]]

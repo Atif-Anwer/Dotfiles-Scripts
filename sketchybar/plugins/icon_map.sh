@@ -312,7 +312,7 @@ function __icon_map() {
    "Logseq")
         icon_result=":logseq:"
         ;;
-   "Canary Mail" | "HEY" | "Mail" | "Mailspring" | "MailMate" | "Superhuman" | "Spark" | "邮件")
+   "Canary Mail" | "HEY" | "Mail" | "Mailspring" | "MailMate" | "Mailbird" | "Superhuman" | "Spark" | "邮件")
         icon_result=":mail:"
         ;;
    "MAMP" | "MAMP PRO")

@@ -9,7 +9,7 @@ sketchybar --add item network.download right \
                  icon.color=0xff8aadf4 \
                  icon.font="SF Pro:Bold:12.0" \
                  label="0 KB/s" \
-                 label.color=0xff8aadf4 \ÍÍ
+                 label.color=0xff8aadf4 \
                  label.font="SF Pro:Bold:11.0" \
                  background.drawing=on \
                  update_freq=2 \

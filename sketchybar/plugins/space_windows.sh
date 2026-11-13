@@ -6,7 +6,7 @@ source "$CONFIG_DIR/plugins/sketchybar_displays.sh"
 source "$CONFIG_DIR/plugins/workspace_focus_style.sh"
 
 if [ "$SENDER" = "display_change" ]; then
-  apply_workspace_sketchybar_displays
+  apply_global_sketchybar_displays
   exit 0
 fi
 
@@ -16,7 +16,6 @@ if [ "$SENDER" = "aerospace_workspace_change" ]; then
   for i in 0 {1..9}; do
     apply_workspace_display "$i" "$fw"
   done
-  apply_workspace_sketchybar_displays
-
+  apply_global_sketchybar_displays
   apply_workspace_focus_styles "$fw"
 fi

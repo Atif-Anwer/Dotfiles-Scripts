@@ -51,15 +51,7 @@ source $ITEM_DIR/apple_logo.sh
 source $ITEM_DIR/spaces.sh
 source $ITEM_DIR/front_app.sh
 
-# Left section unified background
-sketchybar --add bracket left_pill_bg apple_logo space.0 space.1 space.2 space.3 space.4 space.5 space.6 space.7 space.8 space.9 space_creator front_app \
-           --set left_pill_bg background.color=0xcc1e1e2e \
-                              background.corner_radius=20 \
-                              background.height=36 \
-                              background.padding_left=3 \
-                              background.padding_right=3 \
-                              background.blur_radius=20
-
+# Apple logo + monitor workspace pills are added in items/spaces.sh
 
 # -- Right Side Items --
 source $ITEM_DIR/lock.sh
@@ -83,6 +75,8 @@ sketchybar --add bracket right_pill_bg lock calendar network.download network.up
                                background.blur_radius=20 \
                                background.drawing=on
 
+source "$PLUGIN_DIR/sketchybar_displays.sh"
+apply_global_sketchybar_displays
 
 ##### Finalizing Setup #####
 # The below command is only needed at the end of the initial configuration to
