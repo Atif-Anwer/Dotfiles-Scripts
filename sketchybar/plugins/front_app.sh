@@ -1,10 +1,42 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
-# Some events send additional information specific to the event in the $INFO
-# variable. E.g. the front_app_switched event sends the name of the newly
-# focused application in the $INFO variable:
-# https://felixkratz.github.io/SketchyBar/config/events#events-and-scripting
+source "$CONFIG_DIR/colors.sh"
 
-if [ "$SENDER" = "front_app_switched" ]; then
-  sketchybar --set "$NAME" icon="$("$CONFIG_DIR/plugins/icon_map.sh" "$INFO")" label.drawing=off
-fi
+update_front_app() {
+  local app="${INFO:-}"
+  local ws glyph
+
+  if [ -z "$app" ]; then
+    app="$(aerospace list-windows --focused --format '%{app-name}' 2>/dev/null || true)"
+  fi
+  ws="$(aerospace list-workspaces --focused 2>/dev/null || true)"
+
+  if [ -z "$app" ]; then
+    sketchybar --set "$NAME" \
+      icon="${ws}" \
+      icon.font="SF Pro:Semibold:12.0" \
+      icon.drawing=on \
+      icon.color="$GREEN" \
+      label.drawing=off
+    return
+  fi
+
+  glyph="$("$CONFIG_DIR/plugins/icon_map.sh" "$app")"
+
+  # Number left (SF Pro), app glyph right — matches workspace pill order.
+  sketchybar --set "$NAME" \
+    icon="${ws}" \
+    icon.font="SF Pro:Semibold:12.0" \
+    icon.drawing=on \
+    icon.color="$GREEN" \
+    label="$glyph" \
+    label.font="sketchybar-app-font:Regular:12.0" \
+    label.drawing=on \
+    label.color="$GREEN"
+}
+
+case "$SENDER" in
+  front_app_switched|aerospace_workspace_change|forced|"")
+    update_front_app
+    ;;
+esac

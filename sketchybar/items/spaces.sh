@@ -124,7 +124,7 @@ space_creator=(
   padding_right=6
   label.drawing=off
   script="$PLUGIN_DIR/space_windows.sh"
-  icon.color=$WHITE
+  icon.color=$RED
   display="$DISPLAY_IDS"
 )
 
